@@ -31,7 +31,7 @@ module.exports = function (grunt) {
       config: null
     });
 
-    kssCmd.push(realPath + 'node_modules/kss/bin/kss-node');
+    kssCmd.push('"' + realPath + 'node_modules/kss/bin/kss-node"');
 
     this.files.forEach(function (file) {
       kssCmd.push("\"" + file.src[0] + "\"");
