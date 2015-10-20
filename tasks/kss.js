@@ -31,16 +31,11 @@ module.exports = function (grunt) {
       config: null
     });
 
-    kssCmd.push(realPath + 'node_modules/kss/bin/kss-node');
+    kssCmd.push("\"" + realPath + 'node_modules/kss/bin/kss-node"');
 
     this.files.forEach(function (file) {
-      // TODO removed the quotation wrapping, but there is not an issue of white space in
-      // folder paths.
-      //
-      // Removed the quotation wrapping because it was causing paths like this to be used
-      // by KSS: /usr/home/"my_folder"
-      kssCmd.push(file.src[0]);
-      kssCmd.push(file.dest);
+      kssCmd.push("\"" + file.src[0] + "\"");
+      kssCmd.push("\"" + file.dest + "\"");
       dest = file.dest;
     });
 
