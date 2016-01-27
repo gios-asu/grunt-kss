@@ -8,6 +8,8 @@
 
 'use strict';
 
+var fs = require('fs');
+
 module.exports = function (grunt) {
 
   grunt.registerMultiTask('kss', 'Generate style guide by kss-node.', function () {
@@ -31,7 +33,15 @@ module.exports = function (grunt) {
       config: null
     });
 
-    kssCmd.push('"' + realPath + 'node_modules/kss/bin/kss-node"');
+    var kssNodePath = realPath + '../../node_modules/kss/bin/kss-node';
+
+    try {
+      fs.accessSync(kssNodePath, fs.F_OK);
+    } catch (e) {
+      kssNodePath = realPath + 'node_modules/kss/bin/kss-node';
+    }
+
+    kssCmd.push('"' + kssNodePath + '"');
 
     this.files.forEach(function (file) {
       kssCmd.push("\"" + file.src[0] + "\"");
